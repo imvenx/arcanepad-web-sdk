@@ -30,7 +30,6 @@ export class Arcane {
   static init() {
 
     this.msg = new WebSocketService('wss://' + location.hostname + ':3005')
-    // this.pad = new ArcanePad()
 
     this.msg.on(AEventName.Initialize, (e: InitializeEvent) => this.initialize(e))
     this.msg.on(AEventName.RefreshGlobalState, (e: RefreshGlobalStateEvent) => this.refreshGlobalState(e.refreshedGlobalState))
