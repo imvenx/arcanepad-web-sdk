@@ -1,5 +1,5 @@
 # Arcanepad Web SDK
 
-### www.arcanepad.com
+### https://arcanepad.com
 
 🚧 👷 Work in Progress 👷 🚧 
