@@ -8,8 +8,9 @@
         "declaration": true,
         "esModuleInterop": true,
         "lib": [
-            "es2019",
-            "dom"
+            "dom",
+            "dom.iterable",
+            "es2019"
         ]
     },
     "include": [
