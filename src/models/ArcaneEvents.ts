@@ -1,7 +1,7 @@
 import { AEventName } from "./AEventName"
 import { ArcaneClientType, ArcaneUser, GlobalState } from "./models"
 
-export abstract class ArcaneBaseEvent {
+export class ArcaneBaseEvent {
   readonly name: string
   constructor(name: string) {
     this.name = name
