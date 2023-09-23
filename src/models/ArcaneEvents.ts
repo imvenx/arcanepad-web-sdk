@@ -84,11 +84,13 @@ export class IframePadConnectEvent extends ArcaneBaseEvent {
   deviceId: string
   internalId: string
   iframeId: string
-  constructor(clientId: string, internalClientId: string, deviceId: string) {
+  user: ArcaneUser
+  constructor(clientId: string, internalClientId: string, deviceId: string, user: ArcaneUser) {
     super(AEventName.IframePadConnect)
     this.iframeId = clientId
     this.internalId = internalClientId
     this.deviceId = deviceId
+    this.user = user
   }
 }
 
