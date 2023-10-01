@@ -192,6 +192,8 @@ export class GetRotationEulerEvent extends ArcaneBaseEvent {
   }
 }
 
+export class SetScreenOrientationPortrait extends ArcaneBaseEvent { constructor() { super(AEventName.SetScreenOrientationPortrait) } }
+export class SetScreenOrientationLandscape extends ArcaneBaseEvent { constructor() { super(AEventName.SetScreenOrientationLandscape) } }
 
 export class VibrateEvent extends ArcaneBaseEvent {
   milliseconds: number

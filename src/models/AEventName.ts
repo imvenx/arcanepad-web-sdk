@@ -45,6 +45,9 @@ export enum AEventName {
   GetRotationEuler = "GetRotationEuler",
   CalibrateRotationEuler = "CalibrateRotationEuler",
 
+  SetScreenOrientationPortrait = "_SetScreenOrientationPortrait",
+  SetScreenOrientationLandscape = "_SetScreenOrientationLandscape",
+
   Vibrate = "Vibrate",
 
   UpdateUser = "UpdateUser",

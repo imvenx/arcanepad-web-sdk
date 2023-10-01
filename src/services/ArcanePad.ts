@@ -14,8 +14,8 @@ export class ArcanePad {
   iframeIdList: string[]
   isConnected: boolean
   msg: WebSocketService
-  private events: ArcaneEventEmitter
 
+  private events: ArcaneEventEmitter
   constructor({ deviceId, internalId, iframeId, isConnected, user }:
     { deviceId: string; internalId: string; iframeId: string; isConnected: boolean, user?: ArcaneUser }) {
     if (user) this.user = user
