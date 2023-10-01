@@ -1,7 +1,7 @@
 import { Arcane } from "../Arcane"
 import { AEventName } from "../models/AEventName"
 import { ArcaneEventEmitter } from "../models/ArcaneEventEmitter"
-import { GetQuaternionEvent, GetRotationEulerEvent, GetPointerEvent, IframePadConnectEvent, IframePadDisconnectEvent, OpenArcaneMenuEvent, CloseArcaneMenuEvent, ArcaneBaseEvent, StartGetQuaternionEvent, StopGetQuaternionEvent, CalibrateQuaternionEvent, StartGetRotationEulerEvent, StopGetRotationEulerEvent, StartGetPointerEvent, StopGetPointerEvent, VibrateEvent, SetScreenOrientationPortraitEvent, SetScreenOrientationLandscapeEvent } from "../models/ArcaneEvents"
+import { GetQuaternionEvent, GetRotationEulerEvent, GetPointerEvent, IframePadConnectEvent, IframePadDisconnectEvent, OpenArcaneMenuEvent, CloseArcaneMenuEvent, ArcaneBaseEvent, StartGetQuaternionEvent, StopGetQuaternionEvent, CalibrateQuaternionEvent, StartGetRotationEulerEvent, StopGetRotationEulerEvent, StartGetPointerEvent, StopGetPointerEvent, VibrateEvent, SetScreenOrientationPortraitEvent, SetScreenOrientationLandscapeEvent, CalibratePointerEvent } from "../models/ArcaneEvents"
 import { ArcaneUser } from "../models/models"
 import { WebSocketService } from "./WebSocketService"
 
@@ -108,6 +108,10 @@ export class ArcanePad {
 
   onGetPointer(callback: (e: GetPointerEvent) => void) {
     this.events.on(AEventName.GetPointer + '_' + this.internalId, callback)
+  }
+
+  calibratePointer(isTopLeft: boolean) {
+    this.msg.emit(new CalibratePointerEvent(isTopLeft), this.internalIdList)
   }
 
   setScreenOrientationPortrait() {
