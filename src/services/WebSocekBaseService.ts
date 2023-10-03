@@ -1,6 +1,6 @@
 import { AEventName } from "../models/AEventName";
 import { InitializeEvent, ArcaneMessageFrom, ArcaneBaseEvent, ArcaneMessageTo } from "../models/ArcaneEvents";
-import { ArcaneClientInitData } from "../models/models";
+import { ArcaneClientInitData, ArcaneInitParams } from "../models/models";
 import { IWebSocketService } from "./IWebSocketService";
 
 type EventCallback = (eventData: any, from: string) => void;
@@ -15,8 +15,11 @@ export class WebSocketServiceBase implements IWebSocketService {
   private reconnectionDelayMiliseconds = 1000
   private clientInitData: ArcaneClientInitData
 
-  constructor(private url: string, clientInitData: ArcaneClientInitData) {
+  private url = ''
 
+  constructor(url: string, clientInitData: ArcaneClientInitData) {
+
+    this.url = url
     this.clientInitData = clientInitData
 
     this.ws = this.initializeWs(this.clientInitData)
@@ -106,6 +109,7 @@ export class WebSocketServiceBase implements IWebSocketService {
 
   private initializeWs(clientInitData: ArcaneClientInitData) {
 
+    console.log(this.url + `?clientInitData=${JSON.stringify(clientInitData)}`)
     const ws = new WebSocket(this.url + `?clientInitData=${JSON.stringify(clientInitData)}`)
 
     ws.onopen = this.onOpen.bind(this)

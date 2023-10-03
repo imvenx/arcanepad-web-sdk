@@ -1,6 +1,6 @@
 import { AEventName } from "./models/AEventName"
 import { InitializeEvent, RefreshGlobalStateEvent } from "./models/ArcaneEvents"
-import { ArcaneDevice, InitialState, GlobalState } from "./models/models"
+import { ArcaneDevice, InitialState, GlobalState, ArcaneInitParams } from "./models/models"
 import { ArcanePad } from "./services/ArcanePad"
 import { WebSocketService } from "./services/WebSocketService"
 
@@ -27,9 +27,10 @@ export class Arcane {
     return this._arcaneClientInitialized.promise;
   }
 
-  static init() {
+  static init(arcaneInitParams: ArcaneInitParams = new ArcaneInitParams()) {
 
-    this.msg = new WebSocketService('wss://' + location.hostname + ':3005')
+    // this.msg = new WebSocketService('wss://' + location.hostname + ':3005')
+    this.msg = new WebSocketService(arcaneInitParams)
 
     this.msg.on(AEventName.Initialize, (e: InitializeEvent) => this.initialize(e))
     this.msg.on(AEventName.RefreshGlobalState, (e: RefreshGlobalStateEvent) => this.refreshGlobalState(e.refreshedGlobalState))

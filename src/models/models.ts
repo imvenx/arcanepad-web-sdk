@@ -64,3 +64,18 @@ export class ArcaneUser {
     this.color = color
   }
 }
+
+export class ArcaneInitParams {
+  deviceType: ArcaneDeviceType
+  port: string
+  reverseProxyPort: string
+  arcaneCode?: string
+  constructor({ deviceType, port, reverseProxyPort, arcaneCode }:
+    { deviceType?: ArcaneDeviceType, port?: string, reverseProxyPort?: string, arcaneCode?: string } =
+    { deviceType: 'view', port: ' 3005', reverseProxyPort: '3009', arcaneCode: '' }) {
+    this.deviceType = deviceType ?? 'view'
+    this.port = port ?? '3005'
+    this.reverseProxyPort = reverseProxyPort ?? '3009'
+    this.arcaneCode = arcaneCode ?? ''
+  }
+}
