@@ -1,5 +1,6 @@
 import { AEventName } from "./AEventName"
-import { ArcaneClientType, ArcaneUser, GlobalState } from "./models"
+import { GlobalState, ArcaneClientType } from "./Types"
+import { ArcaneUser } from "./Models"
 
 export class ArcaneBaseEvent {
   readonly name: string

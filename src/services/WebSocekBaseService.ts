@@ -1,6 +1,6 @@
 import { AEventName } from "../models/AEventName";
 import { InitializeEvent, ArcaneMessageFrom, ArcaneBaseEvent, ArcaneMessageTo } from "../models/ArcaneEvents";
-import { ArcaneClientInitData, ArcaneInitParams } from "../models/models";
+import { ArcaneClientInitData } from "../models/Types";
 import { IWebSocketService } from "./IWebSocketService";
 
 type EventCallback = (eventData: any, from: string) => void;

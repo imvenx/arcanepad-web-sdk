@@ -1,6 +1,7 @@
 import { AEventName } from "./models/AEventName"
 import { InitializeEvent, RefreshGlobalStateEvent } from "./models/ArcaneEvents"
-import { ArcaneDevice, InitialState, GlobalState, ArcaneInitParams } from "./models/models"
+import { ArcaneDevice, GlobalState } from "./models/Types"
+import { InitialState, ArcaneInitParams } from "./models/Models"
 import { ArcanePad } from "./services/ArcanePad"
 import { WebSocketService } from "./services/WebSocketService"
 
@@ -14,6 +15,8 @@ export class Arcane {
   static internalViewsIds: string[] = []
   static iframePadsIds: string[] = []
   static iframeViewsIds: string[] = []
+
+  private static arcaneInitParams: ArcaneInitParams
 
   private static _arcaneClientInitialized = (() => {
     let resolveFn: (value: InitialState) => void;
@@ -29,6 +32,7 @@ export class Arcane {
 
   static init(arcaneInitParams: ArcaneInitParams = new ArcaneInitParams()) {
 
+    this.arcaneInitParams = arcaneInitParams
     // this.msg = new WebSocketService('wss://' + location.hostname + ':3005')
     this.msg = new WebSocketService(arcaneInitParams)
 
@@ -45,6 +49,13 @@ export class Arcane {
     this.refreshGlobalState(e.globalState)
 
     this.pad = this.pads.find(p => p.deviceId === this.msg.deviceId)
+
+    if (this.pad) { // if is pad
+      if (this.arcaneInitParams.padOrientation === 'Landscape') this.pad.setScreenOrientationLandscape()
+      if (this.arcaneInitParams.padOrientation === 'Portrait') this.pad.setScreenOrientationPortrait()
+    } else { // else if is view
+      if (this.arcaneInitParams.hideMouse) document.body.style.cursor = 'none'
+    }
 
     const initialState = new InitialState(this.pads)
     this._arcaneClientInitialized.resolve(initialState)

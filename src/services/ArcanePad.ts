@@ -2,7 +2,7 @@ import { Arcane } from "../Arcane"
 import { AEventName } from "../models/AEventName"
 import { ArcaneEventEmitter } from "../models/ArcaneEventEmitter"
 import { GetQuaternionEvent, GetRotationEulerEvent, GetPointerEvent, IframePadConnectEvent, IframePadDisconnectEvent, OpenArcaneMenuEvent, CloseArcaneMenuEvent, ArcaneBaseEvent, StartGetQuaternionEvent, StopGetQuaternionEvent, CalibrateQuaternionEvent, StartGetRotationEulerEvent, StopGetRotationEulerEvent, StartGetPointerEvent, StopGetPointerEvent, VibrateEvent, SetScreenOrientationPortraitEvent, SetScreenOrientationLandscapeEvent, CalibratePointerEvent } from "../models/ArcaneEvents"
-import { ArcaneUser } from "../models/models"
+import { ArcaneUser } from "../models/Models"
 import { WebSocketService } from "./WebSocketService"
 
 export class ArcanePad {

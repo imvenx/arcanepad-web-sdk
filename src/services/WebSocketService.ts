@@ -1,6 +1,7 @@
 import { Arcane } from "../Arcane"
 import { ArcaneBaseEvent } from "../models/ArcaneEvents"
-import { InitIframeQueryParams, ArcaneClientInitData, ArcaneInitParams } from "../models/models"
+import { ArcaneInitParams, InitIframeQueryParams } from "../models/Models"
+import { ArcaneClientInitData } from "../models/Types"
 import { getQueryParams } from "../utils/utils"
 import { WebSocketServiceBase } from "./WebSocekBaseService"
 
