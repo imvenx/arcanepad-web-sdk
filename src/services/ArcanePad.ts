@@ -3,6 +3,7 @@ import { AEventName } from "../models/AEventName"
 import { ArcaneEventEmitter } from "../models/ArcaneEventEmitter"
 import { GetQuaternionEvent, GetRotationEulerEvent, GetPointerEvent, IframePadConnectEvent, IframePadDisconnectEvent, OpenArcaneMenuEvent, CloseArcaneMenuEvent, ArcaneBaseEvent, StartGetQuaternionEvent, StopGetQuaternionEvent, CalibrateQuaternionEvent, StartGetRotationEulerEvent, StopGetRotationEulerEvent, StartGetPointerEvent, StopGetPointerEvent, VibrateEvent, SetScreenOrientationPortraitEvent, SetScreenOrientationLandscapeEvent, CalibratePointerEvent } from "../models/ArcaneEvents"
 import { ArcaneUser } from "../models/Models"
+import { ArcaneEventCallback } from "../models/Types"
 import { WebSocketService } from "./WebSocketService"
 
 export class ArcanePad {
@@ -151,7 +152,12 @@ export class ArcanePad {
   }
 
   on<T extends ArcaneBaseEvent>(eventName: string, callback: (e: T) => void) {
+
     const fullEventName = `${eventName}_${this.iframeId}`
+
+    const callbackExists = this.events.eventHandlers[fullEventName]?.some(cb => JSON.stringify(cb) === JSON.stringify(callback));
+    if (callbackExists) return
+
     this.events.on(fullEventName, callback)
 
     const proxyCallback = (event: T, clientId: string) => {
@@ -163,13 +169,22 @@ export class ArcanePad {
     this.msg.on(eventName, proxyCallback)
   }
 
-  off(padId: string, eventName: string, callback?: (e: ArcaneBaseEvent) => void) {
-    const fullEventName = `${eventName}_${padId}`
+  off(eventName: string, callback?: ArcaneEventCallback) {
+    const fullEventName = `${eventName}_${this.iframeId}`
     this.events.off(fullEventName, callback)
+
+    const proxyCallback = (event: any, clientId: string) => {
+      if (clientId === this.iframeId) {
+        this.proxyEvent(eventName, event, this.iframeId)
+      }
+    }
+    this.msg.off(eventName, proxyCallback)
+
   }
 
-  dispose() {
-    this.events.offAll()
-  }
+  // dispose() {
+  //this.msg.offAllFromId(iframeId)
+  //   this.events.offAll()
+  // }
 
 }

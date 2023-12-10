@@ -11,21 +11,16 @@ export class ArcaneEventEmitter {
   }
 
   off(name: string, callback?: ArcaneEventCallback): void {
-    if (!this.eventHandlers[name]) {
+
+    if (!this.eventHandlers[name]) return
+
+    if (!callback) {
+      delete this.eventHandlers[name]
       return
     }
 
-    if (callback) {
-      this.eventHandlers[name] = this.eventHandlers[name].filter(
-        cb => cb !== callback
-      )
-
-      if (this.eventHandlers[name].length === 0) {
-        delete this.eventHandlers[name]
-      }
-    } else {
-      delete this.eventHandlers[name]
-    }
+    this.eventHandlers[name] = this.eventHandlers[name].filter(cb => cb !== callback)
+    if (this.eventHandlers[name].length === 0) delete this.eventHandlers[name]
   }
 
   offAll() {

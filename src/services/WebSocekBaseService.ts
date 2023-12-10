@@ -24,7 +24,7 @@ export class WebSocketServiceBase implements IWebSocketService {
 
     this.ws = this.initializeWs(this.clientInitData)
 
-    this.on(AEventName.Initialize, (e: InitializeEvent) => this.onInitialize(e))
+    this.on(AEventName.Initialize, this.onInitialize)
   }
 
   private onOpen() {
@@ -71,30 +71,27 @@ export class WebSocketServiceBase implements IWebSocketService {
   }
 
   on(name: string, callback: EventCallback): void {
-    if (!this.eventHandlers[name]) {
-      this.eventHandlers[name] = []
-    }
+
+    if (!this.eventHandlers[name]) this.eventHandlers[name] = []
+
+    // const callbackExists = this.eventHandlers[name]?.some(cb => JSON.stringify(cb) === JSON.stringify(callback));
+    // if (callbackExists) return
+
     this.eventHandlers[name].push(callback)
   }
 
   off(name: string, callback?: EventCallback): void {
-    if (!this.eventHandlers[name]) {
+
+    if (!this.eventHandlers[name]) return
+
+    if (!callback) {
+      delete this.eventHandlers[name]
       return
     }
 
-    if (callback) {
-      // Remove a specific callback
-      this.eventHandlers[name] = this.eventHandlers[name].filter(
-        cb => cb !== callback
-      )
+    this.eventHandlers[name] = this.eventHandlers[name].filter(cb => cb !== callback)
+    if (this.eventHandlers[name].length === 0) delete this.eventHandlers[name]
 
-      if (this.eventHandlers[name].length === 0) {
-        delete this.eventHandlers[name]
-      }
-    } else {
-      // Remove all callbacks for the event
-      delete this.eventHandlers[name]
-    }
   }
 
   close(): void {
@@ -120,7 +117,7 @@ export class WebSocketServiceBase implements IWebSocketService {
     return ws
   }
 
-  private onInitialize(e: InitializeEvent) {
+  onInitialize = (e: InitializeEvent) => {
     if (!e.assignedClientId) return console.error("Missing client id on initialize")
     if (!e.assignedDeviceId) return console.error("Missing device id on initialize")
     this.clientId = e.assignedClientId
