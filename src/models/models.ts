@@ -33,8 +33,8 @@ export class ArcaneInitParams {
 
   constructor({
     deviceType = 'view',
-    port = '3005',
-    reverseProxyPort = '3009',
+    port = '3685',
+    reverseProxyPort = '3689',
     arcaneCode = '',
     padOrientation = 'Landscape',
     hideMouse = true,
