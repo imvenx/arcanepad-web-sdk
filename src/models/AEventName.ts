@@ -1,57 +1,57 @@
 export enum AEventName {
 
-  None = "None",
+  None = "_None",
 
-  Left = "Left",
-  Right = "Right",
-  Up = "Up",
-  Down = "Down",
-  Enter = "Enter",
-  Info = "Info",
-  Extra = "Extra",
-  Back = "Back",
+  Left = "_Left",
+  Right = "_Right",
+  Up = "_Up",
+  Down = "_Down",
+  Enter = "_Enter",
+  Info = "_Info",
+  Extra = "_Extra",
+  Back = "_Back",
 
-  AssignDataInit = "AssignDataInit",
+  AssignDataInit = "_AssignDataInit",
 
-  SetDeviceType = "SetDeviceType",
+  SetDeviceType = "_SetDeviceType",
 
-  EnterDevMode = "EnterDevMode",
+  EnterDevMode = "_EnterDevMode",
 
-  EnterApp = "EnterApp",
-  ExitApp = "ExitApp",
+  EnterApp = "_EnterApp",
+  ExitApp = "_ExitApp",
 
-  RefreshGlobalState = "RefreshGlobalState",
+  RefreshGlobalState = "_RefreshGlobalState",
 
-  Initialize = "Initialize",
+  Initialize = "_Initialize",
 
-  ClientConnect = "ClientConnect",
-  ClientDisconnect = "ClientDisconnect",
+  ClientConnect = "_ClientConnect",
+  ClientDisconnect = "_ClientDisconnect",
 
-  IframePadConnect = "IframePadConnect",
-  IframePadDisconnect = "IframePadDisconnect",
+  IframePadConnect = "_IframePadConnect",
+  IframePadDisconnect = "_IframePadDisconnect",
 
-  StartGetQuaternion = "StartGetQuaternion",
-  StopGetQuaternion = "StopGetQuaternion",
-  GetQuaternion = "GetQuaternion",
-  CalibrateQuaternion = "CalibrateQuaternion",
+  StartGetQuaternion = "_StartGetQuaternion",
+  StopGetQuaternion = "_StopGetQuaternion",
+  GetQuaternion = "_GetQuaternion",
+  CalibrateQuaternion = "_CalibrateQuaternion",
 
-  StartGetPointer = "StartGetPointer",
-  StopGetPointer = "StopGetPointer",
-  GetPointer = "GetPointer",
-  CalibratePointer = "CalibratePointer",
+  StartGetPointer = "_StartGetPointer",
+  StopGetPointer = "_StopGetPointer",
+  GetPointer = "_GetPointer",
+  CalibratePointer = "_CalibratePointer",
 
-  StartGetRotationEuler = "StartGetRotationEuler",
-  StopGetRotationEuler = "StopGetRotationEuler",
-  GetRotationEuler = "GetRotationEuler",
-  CalibrateRotationEuler = "CalibrateRotationEuler",
+  StartGetRotationEuler = "_StartGetRotationEuler",
+  StopGetRotationEuler = "_StopGetRotationEuler",
+  GetRotationEuler = "_GetRotationEuler",
+  CalibrateRotationEuler = "_CalibrateRotationEuler",
 
   SetScreenOrientationPortrait = "_SetScreenOrientationPortrait",
   SetScreenOrientationLandscape = "_SetScreenOrientationLandscape",
 
-  Vibrate = "Vibrate",
+  Vibrate = "_Vibrate",
 
-  UpdateUser = "UpdateUser",
+  UpdateUser = "_UpdateUser",
 
-  OpenArcaneMenu = "OpenArcaneMenu",
-  CloseArcaneMenu = "CloseArcaneMenu"
+  OpenArcaneMenu = "_OpenArcaneMenu",
+  CloseArcaneMenu = "_CloseArcaneMenu"
 }
