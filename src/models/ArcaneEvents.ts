@@ -210,14 +210,14 @@ export class StopGetLinearAccelerationEvent extends ArcaneBaseEvent {
 }
 
 export class GetLinearAccelerationEvent extends ArcaneBaseEvent {
-  azimuth: number
-  pitch: number
-  roll: number
-  constructor(azimuth: number, pitch: number, roll: number) {
+  x: number
+  y: number
+  z: number
+  constructor(x: number, y: number, z: number) {
     super(AEventName.GetLinearAcceleration)
-    this.azimuth = azimuth
-    this.pitch = pitch
-    this.roll = roll
+    this.x = x
+    this.y = y
+    this.z = z
   }
 }
 
