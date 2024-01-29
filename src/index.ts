@@ -25,6 +25,9 @@ export {
     StopGetPointerEvent,
     StopGetQuaternionEvent,
     StopGetRotationEulerEvent,
+    StartGetLinearAccelerationEvent,
+    StopGetLinearAccelerationEvent,
+    GetLinearAccelerationEvent,
     UpdateUserEvent,
     VibrateEvent
 } from './models/ArcaneEvents'

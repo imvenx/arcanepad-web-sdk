@@ -53,6 +53,9 @@ export class UpdateUserEvent extends ArcaneBaseEvent {
 export class OpenArcaneMenuEvent extends ArcaneBaseEvent { constructor() { super(AEventName.OpenArcaneMenu) } }
 export class CloseArcaneMenuEvent extends ArcaneBaseEvent { constructor() { super(AEventName.CloseArcaneMenu) } }
 
+export class PauseAppEvent extends ArcaneBaseEvent { constructor() { super(AEventName.PauseApp) } }
+export class ResumeAppEvent extends ArcaneBaseEvent { constructor() { super(AEventName.ResumeApp) } }
+
 export class RefreshGlobalStateEvent extends ArcaneBaseEvent {
   constructor(refreshedGlobalState: GlobalState) {
     super(AEventName.RefreshGlobalState)
@@ -192,6 +195,32 @@ export class GetRotationEulerEvent extends ArcaneBaseEvent {
     this.roll = roll
   }
 }
+
+
+export class StartGetLinearAccelerationEvent extends ArcaneBaseEvent {
+  constructor() {
+    super(AEventName.StartGetLinearAcceleration)
+  }
+}
+
+export class StopGetLinearAccelerationEvent extends ArcaneBaseEvent {
+  constructor() {
+    super(AEventName.StopGetLinearAcceleration)
+  }
+}
+
+export class GetLinearAccelerationEvent extends ArcaneBaseEvent {
+  azimuth: number
+  pitch: number
+  roll: number
+  constructor(azimuth: number, pitch: number, roll: number) {
+    super(AEventName.GetLinearAcceleration)
+    this.azimuth = azimuth
+    this.pitch = pitch
+    this.roll = roll
+  }
+}
+
 
 export class SetScreenOrientationPortraitEvent extends ArcaneBaseEvent { constructor() { super(AEventName.SetScreenOrientationPortrait) } }
 export class SetScreenOrientationLandscapeEvent extends ArcaneBaseEvent { constructor() { super(AEventName.SetScreenOrientationLandscape) } }

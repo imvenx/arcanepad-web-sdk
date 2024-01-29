@@ -20,6 +20,9 @@ export enum AEventName {
   EnterApp = "_EnterApp",
   ExitApp = "_ExitApp",
 
+  PauseApp = "_PauseApp",
+  ResumeApp = "_ResumeApp",
+
   RefreshGlobalState = "_RefreshGlobalState",
 
   Initialize = "_Initialize",
@@ -44,6 +47,10 @@ export enum AEventName {
   StopGetRotationEuler = "_StopGetRotationEuler",
   GetRotationEuler = "_GetRotationEuler",
   CalibrateRotationEuler = "_CalibrateRotationEuler",
+
+  StartGetLinearAcceleration = "_StartGetLinearAcceleration",
+  StopGetLinearAcceleration = "_StopGetLinearAcceleration",
+  GetLinearAcceleration = "_GetLinearAcceleration",
 
   SetScreenOrientationPortrait = "_SetScreenOrientationPortrait",
   SetScreenOrientationLandscape = "_SetScreenOrientationLandscape",

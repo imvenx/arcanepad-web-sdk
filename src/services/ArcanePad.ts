@@ -1,7 +1,7 @@
 import { Arcane } from "../Arcane"
 import { AEventName } from "../models/AEventName"
 import { ArcaneEventEmitter } from "../models/ArcaneEventEmitter"
-import { GetQuaternionEvent, GetRotationEulerEvent, GetPointerEvent, IframePadConnectEvent, IframePadDisconnectEvent, OpenArcaneMenuEvent, CloseArcaneMenuEvent, ArcaneBaseEvent, StartGetQuaternionEvent, StopGetQuaternionEvent, CalibrateQuaternionEvent, StartGetRotationEulerEvent, StopGetRotationEulerEvent, StartGetPointerEvent, StopGetPointerEvent, VibrateEvent, SetScreenOrientationPortraitEvent, SetScreenOrientationLandscapeEvent, CalibratePointerEvent } from "../models/ArcaneEvents"
+import { GetQuaternionEvent, GetRotationEulerEvent, GetPointerEvent, IframePadConnectEvent, IframePadDisconnectEvent, OpenArcaneMenuEvent, CloseArcaneMenuEvent, ArcaneBaseEvent, StartGetQuaternionEvent, StopGetQuaternionEvent, CalibrateQuaternionEvent, StartGetRotationEulerEvent, StopGetRotationEulerEvent, StartGetPointerEvent, StopGetPointerEvent, VibrateEvent, SetScreenOrientationPortraitEvent, SetScreenOrientationLandscapeEvent, CalibratePointerEvent, PauseAppEvent, ResumeAppEvent, GetLinearAccelerationEvent, StartGetLinearAccelerationEvent, StopGetLinearAccelerationEvent } from "../models/ArcaneEvents"
 import { ArcaneUser } from "../models/Models"
 import { ArcaneEventCallback } from "../models/Types"
 import { WebSocketService } from "./WebSocketService"
@@ -39,6 +39,10 @@ export class ArcanePad {
       this.proxyEvent(AEventName.GetRotationEuler, event, clientId)
     })
 
+    this.msg.on(AEventName.GetLinearAcceleration, (event: GetLinearAccelerationEvent, clientId: string) => {
+      this.proxyEvent(AEventName.GetLinearAcceleration, event, clientId)
+    })
+
     this.msg.on(AEventName.GetPointer, (event: GetPointerEvent, clientId: string) => {
       this.proxyEvent(AEventName.GetPointer, event, clientId)
     })
@@ -53,12 +57,20 @@ export class ArcanePad {
       this.proxyEvent(AEventName.IframePadDisconnect, event, event.iframeId)
     })
 
+
     this.msg.on(AEventName.OpenArcaneMenu, (event: OpenArcaneMenuEvent, fromId: string) => {
       this.proxyEvent(AEventName.OpenArcaneMenu, event, fromId)
     })
-
     this.msg.on(AEventName.CloseArcaneMenu, (event: CloseArcaneMenuEvent, fromId: string) => {
       this.proxyEvent(AEventName.CloseArcaneMenu, event, fromId)
+    })
+
+
+    this.msg.on(AEventName.PauseApp, (event: PauseAppEvent, fromId: string) => {
+      this.proxyEvent(AEventName.PauseApp, event, fromId)
+    })
+    this.msg.on(AEventName.ResumeApp, (event: ResumeAppEvent, fromId: string) => {
+      this.proxyEvent(AEventName.ResumeApp, event, fromId)
     })
 
   }
@@ -97,6 +109,21 @@ export class ArcanePad {
   onGetRotationEuler(callback: (e: GetRotationEulerEvent) => void) {
     this.events.on(AEventName.GetRotationEuler + '_' + this.internalId, callback)
   }
+
+
+  startGetLinearAcceleration() {
+    this.msg.emit(new StartGetLinearAccelerationEvent(), this.internalIdList)
+  }
+
+  stopGetLinearAcceleration(offAllListeners: boolean = false) {
+    this.msg.emit(new StopGetLinearAccelerationEvent(), this.internalIdList)
+    if (offAllListeners) this.events.off(AEventName.GetLinearAcceleration + '_' + this.internalId)
+  }
+
+  onGetLinearAcceleration(callback: (e: GetLinearAccelerationEvent) => void) {
+    this.events.on(AEventName.GetLinearAcceleration + '_' + this.internalId, callback)
+  }
+
 
   startGetPointer() {
     this.msg.emit(new StartGetPointerEvent(), this.internalIdList)
@@ -142,6 +169,16 @@ export class ArcanePad {
   onCloseArcaneMenu(callback: (e: CloseArcaneMenuEvent) => void) {
     this.events.on(AEventName.CloseArcaneMenu + '_' + this.internalId, callback)
   }
+
+
+  onPauseApp(callback: (e: PauseAppEvent) => void) {
+    this.events.on(AEventName.PauseApp + '_' + this.internalId, callback)
+  }
+
+  onResumeApp(callback: (e: ResumeAppEvent) => void) {
+    this.events.on(AEventName.ResumeApp + '_' + this.internalId, callback)
+  }
+
 
   // on(padId: string, eventName: string, callback: (e: ArcaneBaseEvent) => void) {
   //   this.events.on(eventName + '_' + padId, callback)
